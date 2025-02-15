@@ -445,30 +445,30 @@ transition: transform 0.1s ease-in-out, box-shadow 0.1s ease-in-out;
 
 
 #sm-banner {
-    display: flex;
-    flex-direction: row; /* Change column to row */
-    justify-content: space-between;
-    flex-wrap: wrap; /* Ensure responsiveness */
-   gap:0px; /* Adds spacing between banners */
-  }
-  
-  #sm-banner .banner-box {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    background-image: url("https://github.com/srujal4518/website/blob/main/images/newbgethnic.png?raw=true");
-    width: 48%; /* Adjust width so two banners fit side by side */
-    height: 50vh;
-    background-size: cover;
-    background-position: center;
-    padding: 30px;
-  }
-  
-  #sm-banner .banner-box2 {
-    background-image: url("https://github.com/srujal4518/website/blob/main/images/banner8.jpeg?raw=true");
-  }
-  
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1px; /* Reduce gap */
+}
+
+#sm-banner .banner-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  background-image: url("https://github.com/srujal4518/website/blob/main/images/newbgethnic.png?raw=true");
+  width: 49.5%; /* Slightly increase width to minimize space */
+  height: 50vh;
+  background-size: cover;
+  background-position: center;
+  padding: 30px;
+}
+
+#sm-banner .banner-box2 {
+  background-image: url("https://github.com/srujal4518/website/blob/main/images/banner8.jpeg?raw=true");
+}
+
   #sm-banner h4 {
     color:rgb(255, 255, 255);
     font-size: 25px;
@@ -858,6 +858,25 @@ footer .copyright {
   font-weight: 700;
   color: #c9cbce;
   z-index: -9;
+}
+
+
+#ab-header {
+    background-image: url("https://github.com/srujal4518/website/blob/main/images/finalabout.jpeg?raw=true"); /* Replace with your actual image URL */
+    background-size: cover; /* Ensures the image covers the entire section */
+    background-position: center; /* Centers the image */
+    background-repeat: no-repeat; /* Prevents image repetition */
+    height: 70vh; /* Adjust height as needed */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white; /* Adjust text color for visibility */
+}
+
+@media (max-width:400px){
+  #ab-header{
+    height: 50vh;
+  }
 }
 
 /* About Page */
