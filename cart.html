@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Threads&Trends</title>
+        <link rel="icon" type="image/x-icon" href="./img/icon1.png">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <style>
+      /* Shopping Cart */
+#shopping-cart {
+    background-color: #fff;
+    padding: 30px;
+    margin: 30px auto;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    max-width: 900px;
+    transition: all 0.3s ease-in-out;
+}
+
+#shopping-cart:hover {
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+#shopping-cart h3 {
+    font-size: 34px;
+    text-align: center;
+    margin-bottom: 25px;
+    color: #1acb93;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 10px;
+}
+
+/* Table Styling */
+.table-cart {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 30px;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.table-cart th,
+.table-cart td {
+    padding: 14px;
+    text-align: center;
+    border-bottom: 1px solid #ece2ec;
+}
+
+.table-cart th {
+    background-color: #f8f8f8;
+    font-weight: bold;
+    color: black;
+    font-size: 20px;
+    text-transform: uppercase;
+}
+
+.table-cart tr:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+    transition: background-color 0.3s ease-in-out;
+}
+
+/* Cart Total */
+.cart-total {
+    display: flex;
+    justify-content: space-between;
+    font-size: 22px;
+    font-weight: bold;
+    color: #444;
+    border-top: 2px solid #ddd;
+    padding-top: 15px;
+    margin-top: 20px;
+}
+
+/* Purchase Button */
+.btn-purchase {
+    display: flex;
+    justify-content: center;
+    margin-top: 25px;
+}
+
+.btn-purchase button {
+    background: linear-gradient(135deg, #ff512f, #dd2476);
+    color: #fff;
+    padding: 14px 35px;
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 4px 10px rgba(0, 128, 0, 0.2);
+}
+
+.btn-purchase button:hover {
+    background: linear-gradient(45deg, #6a0dad, #4b0082);
+    box-shadow: 0 6px 12px rgba(75, 0, 130, 0.3);
+    transform: translateY(-2px);
+}
+
+/* Responsive Design */
+@media (max-width: 820px) {
+    #shopping-cart {
+        padding: 25px;
+        margin: 20px;
+    }
+
+    #shopping-cart h3 {
+        font-size: 30px;
+    }
+
+    .table-cart th, .table-cart td {
+        padding: 12px;
+        font-size: 16px;
+    }
+
+    .cart-total {
+        flex-direction: column;
+        text-align: center;
+        font-size: 18px;
+    }
+
+    .btn-purchase button {
+        padding: 12px 30px;
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 480px) {
+    #shopping-cart {
+        padding: 18px;
+        margin: 15px;
+    }
+
+    #shopping-cart h3 {
+        font-size: 26px;
+    }
+
+    .cart-total {
+        font-size: 16px;
+    }
+
+    .btn-purchase button {
+        padding: 10px 25px;
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 380px) {
+    #shopping-cart {
+        padding: 12px;
+        margin: 10px;
+    }
+
+    #shopping-cart h3 {
+        font-size: 22px;
+    }
+
+    .cart-total {
+        font-size: 14px;
+    }
+
+    .btn-purchase button {
+        padding: 8px 20px;
+        font-size: 14px;
+    }
+}
+
+
+    </style>
+    
+    <body>
+        <section id="header">
+            <a href="hello.html"><img src="https://github.com/srujal4518/website/blob/main/images/LOGO.png?raw=true" class="logo" alt=""></a>
+
+            <div>
+                <ul id="navbar">
+                    <li id="lg-search">
+                        <form id="searchForm" action="search.html" method="GET">
+                            <input type="text" id="searchInput" name="q" placeholder="Search products..." required>
+                            <button type="submit"><i class="bx bx-search"></i></button>
+                        </form>
+                    </li>
+                    <li><a href="hello.html">Home</a></li>
+                    <li><a href="shop.html">Shop</a></li>
+                  
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li id="lg-bag"><a class="active"  href="cart.html"><i class='bx bx-shopping-bag' ></i></a></li>
+                    <a href="#" id="close"><i class='bx bx-x'></i></a>
+                </ul>
+            </div>
+            <div id="mobile">
+                <a href="cart.html"><i class='bx bx-shopping-bag' ></i></a>
+                <i id="bar" class='bx bx-menu'></i>
+            </div>
+        </section>
+
+     <!--Shopping Cart-->
+<section class="container content-section" id="shopping-cart">
+  
+    <h3 style="text-decoration: underline;text-align: center; margin-bottom: 7%;">Shopping Cart</h3>
+   
+   <table class="table table-hover table-cart">
+    <thead>
+      <tr>
+        <th>Product</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Size</th>
+      </tr>
+    </thead>
+    <tbody class="cart-items">
+      
+       
+    </tbody>
+  </table>
+  
+      <div class="cart-total"> 
+        <strong class="cart-total-title">Total</strong>
+        <span  class="cart-total-price" style="text-align: right;">$0</span>
+      </div>
+      
+   
+  
+      <div class="btn-purchase" style="margin-top: 10%;">
+        <button type="button"  class="btn btn-dark btn-purchase "><i class="fa-solid fa-cart-shopping " style="margin-right: 6%;"></i>CONFIRM</button>
+      </div>
+
+      
+      
+  </section>
+
+        <footer class="section-p1">
+            <div class="col">
+                <img class="logo" src="" alt="">
+                <h4>Contact</h4>
+                <p><strong>Address:</strong> GANDHINAGAR</p>
+                <p><strong>Phone:</strong>9016000361</p>
+                <p><strong>Hours:</strong> 10:00 - 18:00, Mon - Sat</p>
+                <div class="follow">
+                    <h4>Follow us</h4>
+                    <div class="icon">
+                        <a href="https://www.instagram.com/thethreadsntrends?igsh=MWFzbmUwd2ZraXUyYw==">
+                        <i class='bx bxl-instagram' ></i>
+                    </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <h4>About</h4>
+                <a href="about.html">About us</a>
+                <a href="#">Devlivery Information</a>
+                
+                <a href="contact.html">Contact Us</a>
+            </div>
+
+            <div class="col">
+                <h4>My Account</h4>
+                <a href="index.html">Sign In</a>
+                <a href="cart.html">View Cart</a>
+                <a href="delivered.html">Track My Order</a>
+                <a href="contact.html">Help</a>
+            </div>
+
+            
+
+            <div class="copyright">
+                <p>©2025- HTML CSS Ecommerce Template</p>
+            </div>
+        </footer>
+        
+<script src="script.js"></script>
+</body>
+</html>

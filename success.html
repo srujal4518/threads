@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Threads&Trends</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        h1 {
+            color: #2c3e50;
+            font-size: 2.5em;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .emoji {
+            font-size: 3rem;
+            margin: 10px 0;
+            animation: bounce 1s infinite alternate;
+        }
+
+        .btn {
+            display: none;
+            padding: 12px 24px;
+            font-size: 1.2em;
+            color: #fff;
+            background-color: #3498db;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: transform 0.2s, background-color 0.3s;
+            margin-top: 20px;
+        }
+
+        .btn:hover {
+            background-color: #07dd12;
+            transform: scale(1.1);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes bounce {
+            from { transform: translateY(-5px); }
+            to { transform: translateY(5px); }
+        }
+    </style>
+</head>
+<body>
+
+    <h1 id="status">🛍️ Thank You for Your Order! 🛍️</h1>
+    <div class="emoji" id="emoji">✅</div>
+    <a href="hello.html" id="continue-btn" class="btn">😃 Continue Shopping 😃</a>
+    <a href="review.html" id="review-btn" class="btn">📢 Please Review 📢</a>
+
+    <script>
+        const steps = [
+            { text: "🚚 In Transit 🚚", emoji: "📦" },
+            { text: "📦 Out for Delivery 📦 pls share OTP:3558 at time of delivery", emoji: "🚛" },
+            { text: "🎉 Order Delivered! 🎉", emoji: "🏡✅" }
+        ];
+
+        let stepIndex = 0;
+        function updateStatus() {
+            if (stepIndex < steps.length) {
+                document.getElementById("status").innerHTML = steps[stepIndex].text;
+                document.getElementById("emoji").innerHTML = steps[stepIndex].emoji;
+                stepIndex++;
+                setTimeout(updateStatus, 3000); // Change status every 3 seconds
+            } else {
+                document.getElementById("continue-btn").style.display = "inline-block"; // Show the "Continue Shopping" button
+                document.getElementById("review-btn").style.display = "inline-block";   // Show the "Please Review" button
+            }
+        }
+
+        setTimeout(updateStatus, 3000);
+    </script>
+
+</body>
+</html>

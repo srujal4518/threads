@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Threads&Trends</title>
+    <style>
+       body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    text-align: center;
+    padding: 20px;
+}
+
+h2 {
+    color: #333;
+}
+
+.stars {
+    display: flex;
+    justify-content: center;
+    margin: 15px 0;
+}
+
+.stars span {
+    font-size: 50px;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+    color: #ccc;
+}
+
+.stars span:hover,
+.stars span.selected {
+    color: gold;
+    transform: scale(1.2);
+}
+
+textarea {
+    width: 80%;
+    max-width: 500px;
+    height: 100px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    resize: none;
+    margin-top: 10px;
+    outline: none;
+    transition: border 0.3s;
+}
+
+textarea:focus {
+    border: 1px solid #007bff;
+}
+
+button {
+    background-color: #007bff;
+    color: white;
+    font-size: 18px;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color:purple;
+}
+
+@media (max-width: 600px) {
+    textarea {
+        width: 90%;
+    }
+}
+ 
+    </style>
+</head>
+<body>
+    <h2>😊Leave a Review 😊</h2>
+    <div class="stars" id="starRating">
+        <span data-value="1">★</span>
+        <span data-value="2">★</span>
+        <span data-value="3">★</span>
+        <span data-value="4">★</span>
+        <span data-value="5">★</span>
+    </div>
+    <textarea id="reviewText" placeholder="Write your review here..."></textarea>
+    <button onclick="submitReview()">Submit</button>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const stars = document.querySelectorAll(".stars span");
+            let selectedRating = 0;
+
+            stars.forEach(star => {
+                star.addEventListener("click", () => {
+                    selectedRating = star.getAttribute("data-value");
+                    stars.forEach(s => s.classList.remove("selected"));
+                    for (let i = 0; i < selectedRating; i++) {
+                        stars[i].classList.add("selected");
+                    }
+                });
+            });
+
+            window.submitReview = () => {
+                const reviewText = document.getElementById("reviewText").value;
+                if (selectedRating === 0 || reviewText.trim() === "") {
+                    alert("Please select a rating and write a review.");
+                    return;
+                }
+
+                fetch("http://localhost:3000/reviews", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ rating: selectedRating, review: reviewText })
+                })
+                .then(response => response.json())
+                .then(data => alert("Review submitted successfully!"))
+                .catch(error => console.error("Error:", error));
+            };
+        });
+    </script>
+</body>
+</html>
+
+
+
+

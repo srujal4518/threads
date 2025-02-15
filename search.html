@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Threads&Trends</title>
+    <link rel="icon" type="image/x-icon" href="./img/icon1.png" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css"/>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      #searchResults {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        margin: 20px;
+      }
+
+      .product {
+        width: 250px;
+        margin: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        padding: 15px;
+        text-align: center;
+        background-color: #fff;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .product:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      }
+
+      .product img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 8px;
+      }
+
+      .product p {
+        margin: 10px 0;
+        font-size: 16px;
+        color: #333;
+        font-weight: 600;
+        line-height: 1.4;
+      }
+
+      .product h4 {
+        font-size: 18px;
+        color: #e74c3c;
+        font-weight: 700;
+        margin: 10px 0;
+      }
+
+      button {
+        background-color: #4caf50;
+        color: white;
+        padding: 12px 25px;
+        border: none;
+        border-radius: 25px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+        margin-top: 10px;
+      }
+
+      button:hover {
+        background-color: #45a049;
+      }
+
+      button:focus {
+        outline: none;
+      }
+
+      @media (max-width: 768px) {
+        .product {
+          width: 100%;
+          margin: 10px 0;
+        }
+        .product img {
+          height: 540px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .product {
+          width: 100%;
+          padding: 10px;
+        }
+
+        .product img {
+          height: 440px;
+        }
+
+        .product h4 {
+          font-size: 16px;
+        }
+      }
+
+      @media (max-width: 400px) {
+        .product {
+          width: 100%;
+          padding: 10px;
+        }
+
+        .product img {
+          height: 480px;
+        }
+
+        .product h4 {
+          font-size: 16px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <section id="header">
+      <a href="hello.html"><img src="https://github.com/srujal4518/website/blob/main/images/LOGO.png?raw=true" class="logo" alt="" /></a>
+
+      <div>
+        <ul id="navbar">
+          <li id="lg-search">
+            <form id="searchForm" action="search.html" method="GET">
+              <input type="text" id="searchInput" name="q" placeholder="Search products..." required />
+              <button type="submit"><i class="bx bx-search"></i></button>
+            </form>
+          </li>
+          <li><a class="active" href="hello.html">Home</a></li>
+          <li><a href="shop.html">Shop</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li id="lg-bag"><a href="cart.html"><i class="bx bx-shopping-bag"></i></a></li>
+          <a href="#" id="close"><i class="bx bx-x"></i></a>
+        </ul>
+      </div>
+      <div id="mobile">
+        <a href="cart.html"><i class="bx bx-shopping-bag"></i></a>
+        <i id="bar" class="bx bx-menu"></i>
+      </div>
+    </section>
+
+    <section id="search-results" class="section-p1">
+      <h2>Search Results</h2>
+      <div class="pro-container" id="product-list">
+        <!-- Dynamically added products will appear here -->
+      </div>
+    </section>
+
+    <div id="searchResults"></div>
+
+    <footer class="section-p1">
+      <div class="col">
+        <img class="logo" src="" alt="" />
+        <h4>Contact</h4>
+        <p><strong>Address:</strong> GANDHINAGAR</p>
+        <p><strong>Phone:</strong>9016000361</p>
+        <p><strong>Hours:</strong> 10:00 - 18:00, Mon - Sat</p>
+        <div class="follow">
+          <h4>Follow us</h4>
+          <div class="icon">
+            <a href="https://www.instagram.com/thethreadsntrends?igsh=MWFzbmUwd2ZraXUyYw==">
+              <i class="bx bxl-instagram"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col">
+        <h4>About</h4>
+        <a href="about.html">About us</a>
+        <a href="#">Delivery Information</a>
+        <a href="contact.html">Contact Us</a>
+      </div>
+
+      <div class="col">
+        <h4>My Account</h4>
+        <a href="index.html">Sign In</a>
+        <a href="cart.html">View Cart</a>
+        <a href="#">Track My Order</a>
+        <a href="contact.html">Help</a>
+      </div>
+
+      <div class="copyright">
+        <p>©2025- HTML CSS Ecommerce Template</p>
+      </div>
+    </footer>
+    <script src="script.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const urlParams = new URLSearchParams(window.location.search);
+        const searchQuery = urlParams.get('q');
+
+        if (searchQuery) {
+          const products = getProducts();
+          const filteredProducts = products.filter(product =>
+            product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            product.desc.toLowerCase().includes(searchQuery.toLowerCase())
+          );
+
+          if (filteredProducts.length > 0) {
+            displayProducts(filteredProducts);
+          } else {
+            document.getElementById("searchResults").innerText = "No products found.";
+          }
+        } else {
+          document.getElementById("searchResults").innerText = "No products found.";
+        }
+
+        // Function to display search results
+        function displayProducts(products) {
+          const searchResults = document.getElementById("searchResults");
+          searchResults.innerHTML = ''; 
+          products.forEach(product => {
+            const productDiv = document.createElement('div');
+            productDiv.classList.add('product');
+            productDiv.innerHTML = `
+              <img src="${product.image}" alt="${product.name}">
+              <p>${product.name}</p>
+              <p>${product.desc}</p>
+              <p>Price: ₹${product.price}</p>
+              <button class="add-to-cart" data-name="${product.name}" data-price="${product.price}" data-image="${product.image}">Add to Cart</button>`;
+            searchResults.appendChild(productDiv);
+          });
+
+          // Attach event listeners to "Add to Cart" buttons
+          document.querySelectorAll(".add-to-cart").forEach(button => {
+            button.addEventListener("click", function () {
+              let name = this.getAttribute("data-name");
+              let price = this.getAttribute("data-price");
+              let image = this.getAttribute("data-image");
+
+              addToCart(name, price, image);
+            });
+          });
+        }
+
+        // Function to fetch products
+        function getProducts() {
+          return [
+            //JACKETS!
+            {
+              name: "adidas",
+              image: "https://github.com/srujal4518/website/blob/main/images/1.jpeg?raw=true",
+              desc: "Mens Green jacket",
+              price: 12499,
+            },
+            {
+              name: "Slazenger",
+              image: "https://github.com/srujal4518/website/blob/main/images/2.jpeg?raw=true",
+              desc: "Men's casual sports jacket",
+              price: 2774,
+            },
+            {
+              name: "UrbanNomad",
+              image: "https://github.com/srujal4518/website/blob/main/images/3.jpeg?raw=true", 
+              desc: "Men's solid denim jacket",
+              price: 1499,
+            },
+            {
+              name: "adidas",
+              image: "https://github.com/srujal4518/website/blob/main/images/4.jpeg?raw=true", 
+              desc: "Men's checked Denim jacket",
+              price: 12499,
+            },
+            {
+              name: "NorthernThreadline",
+              image: "https://github.com/srujal4518/website/blob/main/images/5.jpeg?raw=true", 
+              desc: "Men's Motor leather jacket",
+              price: 72499,
+            },
+            {
+              name: "Slazenger",
+              image: "https://github.com/srujal4518/website/blob/main/images/6.jpeg?raw=true", 
+              desc: "Mens printed wooven casual jacket",
+              price: 25499,
+            },
+            {
+              name: "Wjnvfioo",
+              image: "https://github.com/srujal4518/website/blob/main/images/7.jpeg?raw=true", 
+              desc: "Men's Denim jacket",
+              price: 21499,
+            },
+            {
+              name: "adidas",
+              image: "https://github.com/srujal4518/website/blob/main/images/8.jpeg?raw=true", 
+              desc: "Men's solid casual jacket",
+              price: 2499,
+            },
+
+            //NEW ARRIVALS!
+            {
+              name: "Slazenger",
+              image: "https://github.com/srujal4518/website/blob/main/images/16.jpeg?raw=true", 
+              desc: "Mens printed Floral Shirt",
+              price: 2999,
+            },
+            {
+              name: "Wrogn",
+              image: "https://github.com/srujal4518/website/blob/main/images/17.jpeg?raw=true", 
+              desc: "Men's casual checked shirt",
+              price: 2999,
+            },
+            {
+              name: "adidas",
+              image: "https://github.com/srujal4518/website/blob/main/images/18.jpeg?raw=true", 
+              desc: "Team India jersey",
+              price: 2999,
+            },
+            {
+              name: "Loom&Luxe",
+              image: "https://github.com/srujal4518/website/blob/main/images/19.jpeg?raw=true", 
+              desc: "Men's casual checked shirt",
+              price: 2899,
+            },
+            {
+              name: "Highlander",
+              image: "https://github.com/srujal4518/website/blob/main/images/20.jpeg?raw=true", 
+              desc: "Rohit special collection",
+              price: 42999,
+            },
+            {
+              name: "Highlander",
+              image: "https://github.com/srujal4518/website/blob/main/images/21.jpeg?raw=true", 
+              desc: "Rohit special collection",
+              price: 12999,
+            },
+            {
+              name: "Wjnvfioo",
+              image: "https://github.com/srujal4518/website/blob/main/images/22.jpeg?raw=true", 
+              desc: "men's casual Shirt",
+              price: 2000,
+            },
+            {
+              name: "World2home",
+              image: "https://github.com/srujal4518/website/blob/main/images/23.jpeg?raw=true", 
+              desc: "Men's round neck shirt",
+              price: 2999,
+            },
+
+            //SHOES!
+            {
+              name: "Reebook",
+              image: "https://github.com/srujal4518/website/blob/main/images/45.jpeg?raw=true", 
+              desc: "Premimum Sneaker collection",
+              price: 78000,
+            },
+            {
+              name: "Red-tape",
+              image: "https://github.com/srujal4518/website/blob/main/images/46.jpeg?raw=true", 
+              desc: "Men's Striped White sneakers",
+              price: 27800,
+            },
+            {
+              name: "Nike",
+              image: "https://github.com/srujal4518/website/blob/main/images/47.jpeg?raw=true", 
+              desc: "Men's Sports shoes",
+              price: 35000,
+            },
+            {
+              name: "Skechers",
+              image: "https://github.com/srujal4518/website/blob/main/images/48.jpeg?raw=true", 
+              desc: "Men's Grey casual shoes",
+              price: 27000,
+            },
+            {
+              name: "Underarmour",
+              image: "https://github.com/srujal4518/website/blob/main/images/49.jpeg?raw=true", 
+              desc: "Men's High-top Sneakers",
+              price: 44000,
+            },
+            {
+              name: "HRX",
+              image: "https://github.com/srujal4518/website/blob/main/images/50.jpeg?raw=true", 
+              desc: "Men's Sporty Red Sneakers",
+              price: 45900,
+            },
+            {
+              name: "Reebok",
+              image: "https://github.com/srujal4518/website/blob/main/images/51.jpeg?raw=true", 
+              desc: "Men's Casual Sneakers",
+              price: 20000,
+            },
+            {
+              name: "Nike",
+              image: "https://github.com/srujal4518/website/blob/main/images/52.jpeg?raw=true", 
+              desc: "Men's Street style sneakers",
+              price: 30000,
+            },
+
+            //PERFUMES!
+            {
+              name: "Leader  perfume",
+              image: "https://github.com/srujal4518/website/blob/main/images/64.jpeg?raw=true", 
+              desc: "Soft impressions",
+              price: 78000,
+            },
+            {
+              name: "Soulflower  perfume",
+              image: "https://github.com/srujal4518/website/blob/main/images/65.jpeg?raw=true", 
+              desc: "Hints of sandalwood",
+              price: 27800,
+            },
+            {
+              name: "Soulflower  perfume",
+              image: "https://github.com/srujal4518/website/blob/main/images/66.jpeg?raw=true", 
+              desc: "A rich blend of vanilla",
+              price: 35000,
+            },
+            {
+              name: "Soulflower  perfume",
+              image: "https://github.com/srujal4518/website/blob/main/images/67.jpeg?raw=true", 
+              desc: "Mysterious",
+              price: 27000,
+            },
+            {
+              name: "The-story  perfume",
+              image: "https://github.com/srujal4518/website/blob/main/images/68.jpeg?raw=true", 
+              desc: "A treat for senses",
+              price: 44000,
+            },
+            {
+              name: "Alfeem  perfume",
+              image: "https://github.com/srujal4518/website/blob/main/images/71.jpeg?raw=true", 
+              desc: "Casual vibes",
+              price: 45900,
+            },
+            {
+              name: "Ladyjewel perfume",
+              image: "https://github.com/srujal4518/website/blob/main/images/74.jpeg?raw=true", 
+              desc: "Bold and captivating",
+              price: 20000,
+            },
+            {
+              name: "PC perfume",
+              image: "https://github.com/srujal4518/website/blob/main/images/75.jpeg?raw=true", 
+              desc: "Premimum creations!",
+              price: 30000,
+            },
+
+            //TRADITIONALS
+            {
+              name: "Manyavar",
+              image: "https://github.com/srujal4518/website/blob/main/images/108.webp?raw=true", 
+              desc: "Manyavar specials",
+              price: 78000,
+            },
+            {
+              name: "Manyavar",
+              image: "https://github.com/srujal4518/website/blob/main/images/109.jpg?raw=true", 
+              desc: "Manyavar specials",
+              price: 27800,
+            },
+            {
+              name: "Manyavar",
+              image: "https://github.com/srujal4518/website/blob/main/images/110.jpg?raw=true", 
+              desc: "Manyavar specials",
+              price: 35000,
+            },
+            {
+              name: "Manyavar",
+              image: "https://github.com/srujal4518/website/blob/main/images/111.jpg?raw=true", 
+              desc: "Manyavar specials",
+              price: 27000,
+            },
+            {
+              name: "Manyavar",
+              image: "https://github.com/srujal4518/website/blob/main/images/112.jpg?raw=true", 
+              desc: "Manyavar specials",
+              price: 44000,
+            },
+            {
+              name: "Manyavar",
+              image: "https://github.com/srujal4518/website/blob/main/images/113.jpg?raw=true", 
+              desc: "Manyavar specials",
+              price: 45900,
+            },
+            {
+              name: "Manyavar",
+              image: "https://github.com/srujal4518/website/blob/main/images/117.jpg?raw=true", 
+              desc: "Manyavar specials",
+              price: 20000,
+            },
+            {
+              name: "Manyavar",
+              image: "https://github.com/srujal4518/website/blob/main/images/118.jpg?raw=true", 
+              desc: "Manyavar specials",
+              price: 30000,
+            },
+
+
+
+            //TSHIRT
+            {
+              name: "Roadster",
+              image: "https://github.com/srujal4518/website/blob/main/images/84.jpg?raw=true", 
+              desc: "Casual Black Tshirt",
+              price: 7800,
+            },
+            {
+              name: "ThreadVibe",
+              image: "https://github.com/srujal4518/website/blob/main/images/85.jpg?raw=true", 
+              desc: "Men's Printed Tshirt",
+              price: 2780,
+            },
+            {
+              name: "Boldbasics",
+              image: "https://github.com/srujal4518/website/blob/main/images/86.jpg?raw=true", 
+              desc: "Men's Printed Tshirt",
+              price: 3500,
+            },
+            {
+              name: "WearSphere",
+              image: "https://github.com/srujal4518/website/blob/main/images/88.jpg?raw=true", 
+              desc: "Men's Anime Collection",
+              price: 2700,
+            },
+            {
+              name: "Roadster",
+              image: "https://github.com/srujal4518/website/blob/main/images/89.jpg?raw=true", 
+              desc: "Men's Round neck purple Tshirt",
+              price: 4400,
+            },
+            {
+              name: "HRX",
+              image: "https://github.com/srujal4518/website/blob/main/images/90.jpg?raw=true", 
+              desc: "Men's Round neck off-white Tshirt",
+              price: 4590,
+            },
+            {
+              name: "ChromaFit",
+              image: "https://github.com/srujal4518/website/blob/main/images/91.jpg?raw=true", 
+              desc: "Men's Casual Blue Tshirt",
+              price: 2000,
+            },
+            {
+              name: "StyleCraze",
+              image: "https://github.com/srujal4518/website/blob/main/images/92.jpg?raw=true", 
+              desc: "The boyz special TSHIRT",
+              price: 3000,
+            },
+
+
+            //CASUAL SHIRTS
+            {
+              name: "Roadster",
+              image: "https://github.com/srujal4518/website/blob/main/images/25.jpeg?raw=true", 
+              desc: "Men's red Checked shirt",
+              price: 7800,
+            },
+            {
+              name: "Roadster",
+              image: "https://github.com/srujal4518/website/blob/main/images/26.jpeg?raw=true", 
+              desc: "Mens Checked Cream Shirt",
+              price: 2780,
+            },
+            {
+              name: "Roadster",
+              image: "https://github.com/srujal4518/website/blob/main/images/27.jpeg?raw=true", 
+              desc: "Men's checked blue shirt",
+              price: 3500,
+            },
+            {
+              name: "Roadster",
+              image: "https://github.com/srujal4518/website/blob/main/images/28.jpeg?raw=true", 
+              desc: "Men's checked shirt",
+              price: 2700,
+            },
+            {
+              name: "Roadster",
+              image: "https://github.com/srujal4518/website/blob/main/images/29.jpeg?raw=true", 
+              desc: "Men's blue checked shirt",
+              price: 4400,
+            },
+            {
+              name: "Roadster",
+              image: "https://github.com/srujal4518/website/blob/main/images/30.jpeg?raw=true", 
+              desc: "Men's Solid pink shirt",
+              price: 2000,
+            },
+            {
+              name: "Roadster",
+              image: "https://github.com/srujal4518/website/blob/main/images/31.jpeg?raw=true", 
+              desc: "Men's checked Shirt",
+              price: 4590,
+            },
+            {
+              name: "Roadster",
+              image: "https://github.com/srujal4518/website/blob/main/images/32.jpeg?raw=true", 
+              desc: "Men's checked Darkblue shirt",
+              price: 3000,
+            },
+            
+            //DENIMS
+            {
+              name: "Diesel",
+              image: "https://github.com/srujal4518/website/blob/main/images/124.jpg?raw=true", 
+              desc: "Men's Darkblue Jeans",
+              price: 7800,
+            },
+            {
+              name: "Diesel",
+              image: "https://github.com/srujal4518/website/blob/main/images/125.jpg?raw=true", 
+              desc: "Men's Light-blue Jeans",
+              price: 2780,
+            },
+            {
+              name: "Diesel",
+              image: "https://github.com/srujal4518/website/blob/main/images/126.jpg?raw=true", 
+              desc: "Men's fadded Jeans",
+              price: 3500,
+            },
+            {
+              name: "Diesel",
+              image: "https://github.com/srujal4518/website/blob/main/images/127.jpg?raw=true", 
+              desc: "Men's special Jeans",
+              price: 2700,
+            },
+            {
+              name: "Diesel",
+              image: "https://github.com/srujal4518/website/blob/main/images/128.jpg?raw=true", 
+              desc: "Denim Jeans",
+              price: 4400,
+            },
+            {
+              name: "Diesel",
+              image: "https://github.com/srujal4518/website/blob/main/images/129.jpg?raw=true", 
+              desc: "Men's Cream trouser",
+              price: 4590,
+            },
+            {
+              name: "Diesel",
+              image: "https://github.com/srujal4518/website/blob/main/images/130.jpg?raw=true", 
+              desc: "Classic Joggers",
+              price: 2000,
+            },
+            {
+              name: "Diesel",
+              image: "https://github.com/srujal4518/website/blob/main/images/134.jpg?raw=true", 
+              desc: "Men's Oversized Jeans",
+              price: 3000,
+            },
+
+            //ACCESSORIES
+            {
+              name: "Woodland",
+              image: "https://github.com/srujal4518/website/blob/main/images/144.jpeg?raw=true", 
+              desc: "Men's Wallet",
+              price: 78000,
+            },
+            {
+              name: "Woodland",
+              image: "https://github.com/srujal4518/website/blob/main/images/145.jpeg?raw=true", 
+              desc: "Men's Wallet",
+              price: 27800,
+            },
+            {
+              name: "Rayban",
+              image: "https://github.com/srujal4518/website/blob/main/images/148.jpeg?raw=true", 
+              desc: "Men's specials sunglasses",
+              price: 35000,
+            },
+            {
+              name: "Rayban",
+              image: "https://github.com/srujal4518/website/blob/main/images/150.jpeg?raw=true", 
+              desc: "Men's specials  sunglasses",
+              price: 27000,
+            },
+            {
+              name: "Levi's",
+              image: "https://github.com/srujal4518/website/blob/main/images/152.jpeg?raw=true", 
+              desc: "Premimum Leather belt",
+              price: 44000,
+            },
+            {
+              name: "Levi's",
+              image: "https://github.com/srujal4518/website/blob/main/images/154.jpeg?raw=true", 
+              desc: "Premimum Leather belt",
+              price: 45900,
+            },
+            {
+              name: "Sonata",
+              image: "https://github.com/srujal4518/website/blob/main/images/156.jpeg?raw=true", 
+              desc: "Classic watch",
+              price: 20000,
+            },
+            {
+              name: "Titan",
+              image: "https://github.com/srujal4518/website/blob/main/images/157.jpeg?raw=true", 
+              desc: "Titan special watch",
+              price: 30000,
+            },
+
+          ];
+        }
+
+        // Function to add a product to cart
+function addToCart(name, price, image) {
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  let existingItem = cart.find(item => item.name === name);
+
+  if (existingItem) {
+    existingItem.quantity += 1;
+  } else {
+    cart.push({ name, price, image, quantity: 1 }); // Corrected "imageSrc" to "image"
+  }
+
+  localStorage.setItem("cart", JSON.stringify(cart));
+  alert("Item added to cart!");
+  loadCart();
+}
+
+
+     // Function to load cart items into the cart table
+function loadCart() {
+    let cartTable = document.querySelector(".cart-items");
+    let totalPriceElement = document.querySelector(".cart-total-price");
+
+    if (!cartTable || !totalPriceElement) return;
+
+    cartTable.innerHTML = "";
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    let totalPrice = 0;
+
+    cart.forEach((item, index) => {
+        let row = document.createElement("tr");
+        row.innerHTML = `
+            <td><img src="${item.imageSrc}" width="50"> ${item.title}</td>
+            <td>₹${item.price}</td>
+            <td>
+                <button class="quantity-minus" data-index="${index}">-</button>
+                <span class="quantity-value">${item.quantity}</span>
+                <button class="quantity-plus" data-index="${index}">+</button>
+            </td>
+            <td><button class="remove-item btn btn-danger" data-index="${index}">Remove</button></td>
+        `;
+        cartTable.appendChild(row);
+        totalPrice += item.price * item.quantity;
+    });
+
+    totalPriceElement.innerText = `₹${totalPrice}`;
+}
+
+        // Event listeners for quantity update and item removal
+        document.querySelector(".cart-items").addEventListener("click", function(event) {
+          if (event.target.classList.contains("quantity-minus")) {
+            updateQuantity(event.target, -1);
+          } else if (event.target.classList.contains("quantity-plus")) {
+            updateQuantity(event.target, 1);
+          } else if (event.target.classList.contains("remove-item")) {
+            removeItem(event.target);
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
