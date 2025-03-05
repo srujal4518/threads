@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Size - Threads&Trends</title>
+    <link rel="icon" type="image/x-icon" href="./img/icon1.png">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Center the size selection */
+        select {
+            width: 50%;
+            padding: 12px;
+            font-size: 18px;
+            border: 2px solid #6c63ff;
+            border-radius: 8px;
+            background-color:whitesmoke;
+            color: black;
+            outline: none;
+            transition: all 0.3s ease-in-out;
+            cursor: pointer;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Dropdown hover & focus */
+        select:hover, select:focus {
+            border-color: #ff6600;
+            box-shadow: 0px 4px 12px rgba(255, 102, 0, 0.3);
+            transform: scale(1.05);
+        }
+
+        /* Styling the dropdown options */
+        select option {
+            font-size: 16px;
+            background-color: #fff;
+            color: black;
+            padding: 10px;
+        }
+
+        select option:hover {
+            background-color: #ff6600;
+            color: white;
+        }
+        .size-selection {
+            text-align: center;
+            padding: 30px;
+            margin: 30px auto;
+            width: 60%;
+            background: #fff;
+            box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        .size-selection h2 {
+            font-size: 28px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .size-selection select {
+            width: 50%;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .size-chart {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+        }
+
+        .size-chart th, .size-chart td {
+            padding: 12px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        .size-chart th {
+            background: #f4f4f4;
+            font-weight: bold;
+        }
+
+        .btn-confirm {
+            margin-top: 20px;
+            background-color: green;
+            color: white;
+            padding: 12px 30px;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-confirm:hover {
+            background-color: purple;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .size-selection {
+                width: 90%;
+            }
+            .size-selection select {
+                width: 80%;
+            }
+            .size-chart {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <section id="header">
+        <a href="hello.html">
+            <img src="https://github.com/srujal4518/website/blob/main/images/LOGO.png?raw=true" class="logo" alt="">
+        </a>
+        <ul id="navbar">
+            <li><a class="active" href="hello.html">Home</a></li>
+            <li><a href="shop.html">Shop</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li id="lg-bag"><a href="cart.html"><i class='bx bx-shopping-bag'></i></a></li>
+        </ul>
+    </section>
+
+    <!-- Size Selection Section -->
+    <section class="size-selection">
+        <h2>Select Your Size</h2>
+        <label for="size">Choose a size:</label>
+        <select id="size">
+            <option value="S">Small (S)</option>
+            <option value="M">Medium (M)</option>
+            <option value="L">Large (L)</option>
+            <option value="XL">Extra Large (XL)</option>
+            <option value="XXL">Double Extra Large (XXL)</option>
+        </select>
+
+        <h2>Size Chart</h2>
+        <table class="size-chart">
+            <thead>
+                <tr>
+                    <th>Size</th>
+                    <th>Chest (inches)</th>
+                    <th>Waist (inches)</th>
+                    <th>Length (inches)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>S</td>
+                    <td>34-36</td>
+                    <td>28-30</td>
+                    <td>26</td>
+                </tr>
+                <tr>
+                    <td>M</td>
+                    <td>38-40</td>
+                    <td>32-34</td>
+                    <td>27</td>
+                </tr>
+                <tr>
+                    <td>L</td>
+                    <td>42-44</td>
+                    <td>36-38</td>
+                    <td>28</td>
+                </tr>
+                <tr>
+                    <td>XL</td>
+                    <td>46-48</td>
+                    <td>40-42</td>
+                    <td>29</td>
+                </tr>
+                <tr>
+                    <td>XXL</td>
+                    <td>50-52</td>
+                    <td>44-46</td>
+                    <td>30</td>
+                </tr>
+            </tbody>
+        </table>
+         <a href="final.html">
+        <button class="btn-confirm" onclick="confirmSize()">Confirm Size & Continue</button>
+    </a>
+    </section>
+
+    <footer class="section-p1">
+        <div class="col">
+            <h4>Contact</h4>
+            <p><strong>Address:</strong> GANDHINAGAR</p>
+            <p><strong>Phone:</strong> 9016000361</p>
+            <p><strong>Hours:</strong> 10:00 - 18:00, Mon - Sat</p>
+            <div class="follow">
+                <h4>Follow us</h4>
+                <div class="icon">
+                    <a href="https://www.instagram.com/thethreadsntrends?igsh=MWFzbmUwd2ZraXUyYw==">
+                        <i class='bx bxl-instagram'></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <h4>About</h4>
+            <a href="about.html">About us</a>
+            <a href="#">Delivery Information</a>
+            <a href="contact.html">Contact Us</a>
+        </div>
+
+        <div class="col">
+            <h4>My Account</h4>
+            <a href="index.html">Sign In</a>
+            <a href="cart.html">View Cart</a>
+            <a href="#">Track My Order</a>
+            <a href="contact.html">Help</a>
+        </div>
+
+        <div class="copyright">
+            <p>©2025 - HTML CSS Ecommerce Template</p>
+        </div>
+    </footer>
+
+    <script>
+        function confirmSize() {
+            let selectedSize = document.getElementById("size").value;
+            localStorage.setItem("selectedSize", selectedSize);
+            window.location.href = "checkout.html"; // Redirect to checkout page
+        }
+    </script>
+
+</body>
+</html>

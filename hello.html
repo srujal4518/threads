@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Threads&Trends</title>
+        <link rel="icon" type="image/x-icon" href="./img/icon1.png">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+        <link rel="stylesheet" href="style.css">
+    </head>
+
+    <body>
+        <section id="header">
+            <a href="hello.html">
+                <img src="https://github.com/srujal4518/website/blob/main/images/LOGO.png?raw=true" class="logo" alt="">
+            </a>
+            <ul id="navbar">
+                <li id="lg-search">
+                    <form id="searchForm" action="search.html" method="GET">
+                        <input type="text" id="searchInput" name="q" placeholder="Search products..." required onkeyup="searchProducts(event)">
+                        <button type="submit"><i class="bx bx-search"></i></button>
+                    </form>
+                    <ul id="searchResults"></ul> <!-- Dropdown for live results -->
+                </li>
+                <li><a class="active" href="hello.html">Home</a></li>
+                <li><a href="shop.html">Shop</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li id="lg-bag"><a href="cart.html"><i class='bx bx-shopping-bag'></i></a></li>
+                <a href="#" id="close"><i class='bx bx-x'></i></a>
+            </ul>
+            <div id="mobile">
+                <a href="cart.html"><i class='bx bx-shopping-bag'></i></a>
+       
+                <i id="bar" class='bx bx-menu'></i>
+            </div>
+        </section>
+    
+    
+        <section id="main">
+            <h4>Trade-in-offer</h4>
+            <h2>Super value deals</h2>
+            <h1>On all products</h1>
+            <p>Save more with discounts up to 70% off!</p>
+            <a href="shop.html">
+            <button class="btn">Shop Now</button>
+        </a>
+        </section> 
+        <section id="fea">
+        <h2>Features</h2>
+    </section>
+        <section id="feature" class="section-p1">
+            
+            <div class="fe-box">
+                <img src="https://github.com/srujal4518/website/blob/main/images/shipping.jpg?raw=true" height="150px" alt="">
+                <h6>Free Shipping</h6>
+                <p>Enjoy free shipping</p>
+            </div>
+            <div class="fe-box">
+                <a href="shop.html"><img src="https://github.com/srujal4518/website/blob/main/images/shop.jpeg?raw=true" alt=""></a>
+                <h6>Online Order</h6>
+                <p>Shop Anywhere</p>
+            </div>
+            <div class="fe-box">
+                <a href="ethnic.html"><img src="https://github.com/srujal4518/website/blob/main/images/deals.jpeg?raw=true" alt=""></a>
+                <h6>Save Money</h6>
+                <p>Get the best deals.</p>
+            </div>
+            <div class="fe-box">
+                <a href="tshirt.html"><img src="https://github.com/srujal4518/website/blob/main/images/offer.jpeg?raw=true" alt=""></a>
+                <h6>Promotions</h6>
+                <p>Exclusive offers</p>
+            </div>
+            <div class="fe-box">
+                <img src="https://github.com/srujal4518/website/blob/main/images/happy.jpeg?raw=true" height="150px">
+                <h6>Happy customers</h6>
+                <p>Customer satisfaction</p>
+            </div>
+            <div class="fe-box">
+                <a href="contact.html"><img src="https://github.com/srujal4518/website/blob/main/images/service.jpeg?raw=true" alt=""></a>
+                <h6>F24/7 Support</h6>
+                <p>helping you 24/7</p>
+            </div>
+        </section>
+
+        <section id="product1" class="section-p1">
+            <h2>Trending Products</h2>
+            <p>Winter Collection New Modern Design</p>
+            <div class="pro-container">
+                <div class="pro">
+                    <img class="shirt" src="https://github.com/srujal4518/website/blob/main/images/1.jpeg?raw=true" alt="">
+                    <div class="des">
+                        <span>adidas</span>
+                        <h5>Mens Green jacket</h5>
+                        <div class="star">
+                            <i class='bx bxs-star' ></i>
+                            <i class='bx bxs-star' ></i>
+                            <i class='bx bxs-star' ></i>
+                            <i class='bx bxs-star' ></i>
+                        </div>
+                        <h4>₹12499</h4>
+                    </div>
+                    <a href="cart.html"><i class='bx bx-cart cart' ></i></a>
+                </div>
+                <div class="pro">
+                    <img class="shirt" src="https://github.com/srujal4518/website/blob/main/images/2.jpeg?raw=true" alt="">
+                    <div class="des">
+                        <span>Slazenger</span>
+                        <h5>Men's casual sports jacket</h5>
+                        <div class="star">
+                            <i class='bx bxs-star' ></i>
+                            <i class='bx bxs-star' ></i>
+                            <i class='bx bxs-star' ></i>
+                            <i class='bx bxs-star' ></i>
+                            <i class='bx bxs-star' ></i>
+                        </div>
+                        <h4>₹2774</h4>
+                    </div>
+                    <a href="#"><i class='bx bx-cart cart' ></i></a>
+                </div>
+                <div class="pro">
+                    <img class="shirt" src="https://github.com/srujal4518/website/blob/main/images/3.jpeg?raw=true" alt="">
+                    <div class="des">
+                        <span>UrbanNomad</span>
+                        <h5>Men's solid denim jacket</h5>
+                        <div class="star">
+                            <i class='bx bxs-star' ></i>
+                            <i class='bx bxs-star' ></i>
+                            <i class='bx bxs-star' ></i>
+                            <i class='bx bxs-star' ></i>
+                            <i class='bx bxs-star' ></i>
+                        </div>
+                        <h4>₹1499</h4>
+                    </div>
+                    <a href="#"><i class='bx bx-cart cart' ></i></a>
+                </div>
+                <div class="pro">
+                    <img class="shirt" src="https://github.com/srujal4518/website/blob/main/images/11.jpeg?raw=true" alt="">
+                    <div class="des">
+                        <span>adidas</span>
+                        <h5>Men's checked Denim jacket</h5>
+                        <div class="star">
+                            <i class='bx bxs-star' ></i>
+                            <i class='bx bxs-star' ></i>
+                            <i class='bx bxs-star' ></i>
+                            <i class='bx bxs-star' ></i>
+                            <i class='bx bxs-star' ></i>
+                        </div>
+                        <h4>₹12499</h4>
+                    </div>
+                    <a href="#"><i class='bx bx-cart cart' ></i></a>
+                </div>
+                <div class="pro">
+                    <img class="shirt" src="https://github.com/srujal4518/website/blob/main/images/12.jpeg?raw=true" alt="">
+                    <div class="des">
+                        <span>NorthernThreadline</span>
+                        <h5>Men's Motor leather jacket</h5>
+                        <div class="star">
+                            <i class='bx bxs-star' ></i>
+                            <i class='bx bxs-star' ></i>
+                            <i class='bx bxs-star' ></i>
+                            <i class='bx bxs-star' ></i>
+                            <i class='bx bxs-star' ></i>
+                        </div>
+                        <h4>₹72499</h4>
+                    </div>
+                    <a href="#"><i class='bx bx-cart cart' ></i></a>
+                </div>
+                <div class="pro">
+                    <img class="shirt" src="https://github.com/srujal4518/website/blob/main/images/10.jpeg?raw=true" alt="">
+                    <div class="des">
+                        <span>Slazenger</span>
+                        <h5>Mens printed wooven casual jacket</h5>
+                        <div class="star">
+                            <i class='bx bxs-star' ></i>
+                            <i class='bx bxs-star' ></i>
+                            <i class='bx bxs-star' ></i>
+                            <i class='bx bxs-star' ></i>
+                            <i class='bx bxs-star' ></i>
+                        </div>
+                        <h4>₹25499</h4>
+                    </div>
+                    <a href="#"><i class='bx bx-cart cart' ></i></a>
+                </div>
+                <div class="pro">
+                    <img class="shirt" src="https://github.com/srujal4518/website/blob/main/images/7.jpeg?raw=true" alt="">
+                    <div class="des">
+                        <span>Wjnvfioo</span>
+                        <h5>Men's Denim jacket</h5>
+                        <div class="star">
+                            <i class='bx bxs-star' ></i>
+                            <i class='bx bxs-star' ></i>
+                            <i class='bx bxs-star' ></i>
+                            <i class='bx bxs-star' ></i>
+                            <i class='bx bxs-star' ></i>
+                        </div>
+                        <h4>₹21499</h4>
+                    </div>
+                    <a href="#"><i class='bx bx-cart cart' ></i></a>
+                </div>
+                <div class="pro">
+                    <img class="shirt" src="https://github.com/srujal4518/website/blob/main/images/9.jpeg?raw=true" alt="">
+                    <div class="des">
+                        <span>adidas</span>
+                        <h5>Men's solid casual jacket</h5>
+                        <div class="star">
+                            <i class='bx bxs-star' ></i>
+                            <i class='bx bxs-star' ></i>
+                            <i class='bx bxs-star' ></i>
+                            <i class='bx bxs-star' ></i>
+                            <i class='bx bxs-star' ></i>
+                        </div>
+                        <h4>₹2499</h4>
+                    </div>
+                    <a href="#"><i class='bx bx-cart cart' ></i></a>
+                </div>
+            </div>
+        </section>
+
+                
+
+
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+
+        <section id="banner" class="section-m1">
+            <h4>Repair Services</h4>
+            <h2>Upto <span>70% Off</span> - All t-Shirts & Accessories</h2>
+            <a href="tshirt.html">
+            <button class="normal">Explore More</button>
+        </a>
+        </section>
+
+
+
+
+
+
+
+        <section id="product1" class="section-p1">
+            <h2>New Arrivals</h2>
+            <p>Summer Collection latest Design</p>
+            <div class="pro-container">
+                <div class="pro">
+                    <img class="shirt" src="https://github.com/srujal4518/website/blob/main/images/16.jpeg?raw=true" alt="">
+                    <div class="des">
+                        <span>Slazenger</span>
+                        <h5>Mens printed Floral Shirt</h5>
+                        <div class="star">
+                            <i class='bx bxs-star' ></i>
+                            <i class='bx bxs-star' ></i>
+                            <i class='bx bxs-star' ></i>
+                            <i class='bx bxs-star' ></i>
+                            <i class='bx bxs-star' ></i>
+                        </div>
+                        <h4>₹2999</h4>
+                    </div>
+                    <a href="#"><i class='bx bx-cart cart' ></i></a>
+               </div>
+               <div class="pro">
+                <img class="shirt" src="https://github.com/srujal4518/website/blob/main/images/17.jpeg?raw=true" alt="">
+                <div class="des">
+                    <span>Wrogn</span>
+                    <h5>Men's casual checked shirt</h5>
+                    <div class="star">
+                        <i class='bx bxs-star' ></i>
+                        <i class='bx bxs-star' ></i>
+                        <i class='bx bxs-star' ></i>
+                        <i class='bx bxs-star' ></i>
+                        <i class='bx bxs-star' ></i>
+                    </div>
+                    <h4>₹2999</h4>
+                </div>
+                <a href="#"><i class='bx bx-cart cart' ></i></a>
+           </div>
+           <div class="pro">
+            <img class="shirt" src="https://github.com/srujal4518/website/blob/main/images/18.jpeg?raw=true" alt="">
+            <div class="des">
+                <span>adidas</span>
+                <h5>Team India jersey</h5>
+                <div class="star">
+                    <i class='bx bxs-star' ></i>
+                    <i class='bx bxs-star' ></i>
+                    <i class='bx bxs-star' ></i>
+                    <i class='bx bxs-star' ></i>
+                    <i class='bx bxs-star' ></i>
+                </div>
+                <h4>₹2999</h4>
+            </div>
+            <a href="#"><i class='bx bx-cart cart' ></i></a>
+       </div>
+       <div class="pro">
+        <img class="shirt" src="https://github.com/srujal4518/website/blob/main/images/19.jpeg?raw=true" alt="">
+        <div class="des">
+            <span>Loom&Luxe</span>
+            <h5>Men's casual checked shirt</h5>
+            <div class="star">
+                <i class='bx bxs-star' ></i>
+                <i class='bx bxs-star' ></i>
+                <i class='bx bxs-star' ></i>
+                <i class='bx bxs-star' ></i>
+                <i class='bx bxs-star' ></i>
+            </div>
+            <h4>₹2899</h4>
+        </div>
+        <a href="#"><i class='bx bx-cart cart' ></i></a>
+   </div>
+   <div class="pro">
+    <img class="shirt" src="https://github.com/srujal4518/website/blob/main/images/20.jpeg?raw=true" alt="">
+    <div class="des">
+        <span>Highlander</span>
+        <h5>Rohit special collection</h5>
+        <div class="star">
+            <i class='bx bxs-star' ></i>
+            <i class='bx bxs-star' ></i>
+            <i class='bx bxs-star' ></i>
+            <i class='bx bxs-star' ></i>
+            <i class='bx bxs-star' ></i>
+        </div>
+        <h4>₹42999</h4>
+    </div>
+    <a href="#"><i class='bx bx-cart cart' ></i></a>
+</div>
+<div class="pro">
+    <img class="shirt" src="https://github.com/srujal4518/website/blob/main/images/21.jpeg?raw=true" alt="">
+    <div class="des">
+        <span>Highlander</span>
+        <h5>Rohit special collection</h5>
+        <div class="star">
+            <i class='bx bxs-star' ></i>
+            <i class='bx bxs-star' ></i>
+            <i class='bx bxs-star' ></i>
+            <i class='bx bxs-star' ></i>
+            <i class='bx bxs-star' ></i>
+        </div>
+        <h4>₹12999</h4>
+    </div>
+    <a href="#"><i class='bx bx-cart cart' ></i></a>
+</div>
+<div class="pro">
+    <img class="shirt" src="https://github.com/srujal4518/website/blob/main/images/22.jpeg?raw=true" alt="">
+    <div class="des">
+        <span>Wjnvfioo</span>
+        <h5>men's casual Shirts</h5>
+        <div class="star">
+            <i class='bx bxs-star' ></i>
+            <i class='bx bxs-star' ></i>
+            <i class='bx bxs-star' ></i>
+            <i class='bx bxs-star' ></i>
+            <i class='bx bxs-star' ></i>
+        </div>
+        <h4>₹2000</h4>
+    </div>
+    <a href="#"><i class='bx bx-cart cart' ></i></a>
+</div>
+<div class="pro">
+    <img class="shirt" src="https://github.com/srujal4518/website/blob/main/images/23.jpeg?raw=true" alt="">
+    <div class="des">
+        <span>World2home</span>
+        <h5>Men's round neck shirt</h5>
+        <div class="star">
+            <i class='bx bxs-star' ></i>
+            <i class='bx bxs-star' ></i>
+            <i class='bx bxs-star' ></i>
+            <i class='bx bxs-star' ></i>
+            <i class='bx bxs-star' ></i>
+        </div>
+        <h4>₹2999</h4>
+    </div>
+    <a href="#"><i class='bx bx-cart cart' ></i></a>
+</div>
+        </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <section id="sm-banner" class="section-p1">
+            <div class="banner-box">
+                <h4>Shadi shoppers</h4>
+                <h2>buy 1 get 1 free</h2>
+                <span>The best classic dress is on sale</span>
+                <a href="ethnic.html">
+                    <button class="white">Collection</button>
+                </a>
+            </div>
+            <div class="banner-box banner-box2">
+                <h4>Accessory hub</h4>
+                <h2>upcoming season</h2>
+                <span>elevate your style!</span>
+                <a href="extra.html">
+                    <button class="white">elevate</button>
+                </a>
+            </div>
+        </section>
+
+        <section id="banner3">
+            <div class="banner-box">
+                <h2>Scent-sational sale</h2>
+                <h3>Exciting discounts</h3>
+                <a href="scent.html">
+                    <button class="white">Collection</button>
+                </a>
+            </div>
+            <div class="banner-box banner-box2">
+                <h2>NEW FOOTWEARS</h2>
+                <h3>Spring / Summer 2023</h3>
+                <a href="shoes.html">
+                    <button class="white">Explore</button>
+                </a>
+            </div>
+            <div class="banner-box banner-box3">
+                <h2>T-SHIRTS</h2>
+                <h3>New Trendy Prints</h3>
+                <a href="tshirt.html">
+                    <button class="white">Checkout</button>
+                </a>
+            </div>
+        </section>
+
+
+
+
+
+       
+
+<!--Shopping Cart-->
+<section class="container content-section" id="shopping-cart">
+  
+    <h3 style="text-decoration: underline;text-align: center; margin-bottom: 7%;">Shopping Cart</h3>
+   
+   <table class="table table-hover table-cart">
+    <thead>
+      <tr>
+        <th>Product</th>
+        <th>Price</th>
+        <th>Quantity</th>
+      </tr>
+    </thead>
+    <tbody class="cart-items">
+      
+       
+    </tbody>
+  </table>
+  
+      <div class="cart-total"> 
+        <strong class="cart-total-title">Total</strong>
+        <span  class="cart-total-price" style="text-align: right;">$0</span>
+      </div>
+   
+  
+      <div class="btn-purchase" style="margin-top: 10%;">
+        <button type="button"  class="btn btn-dark btn-purchase "><i class="fa-solid fa-cart-shopping " style="margin-right: 6%;"></i>PURCHASE</button>
+      </div>
+   
+      
+  </section>
+
+        <footer class="section-p1">
+            <div class="col">
+                <img class="logo" src="" alt="">
+                <h4>Contact</h4>
+                <p><strong>Address:</strong> GANDHINAGAR</p>
+                <p><strong>Phone:</strong>9016000361</p>
+                <p><strong>Hours:</strong> 10:00 - 18:00, Mon - Sat</p>
+                <div class="follow">
+                    <h4>Follow us</h4>
+                    <div class="icon">
+                        <a href="https://www.instagram.com/thethreadsntrends?igsh=MWFzbmUwd2ZraXUyYw==">
+                        <i class='bx bxl-instagram' ></i>
+                    </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <h4>About</h4>
+                <a href="about.html">About us</a>
+                <a href="#">Devlivery Information</a>
+                
+                <a href="contact.html">Contact Us</a>
+            </div>
+
+            <div class="col">
+                <h4>My Account</h4>
+                <a href="index.html">Sign In</a>
+                <a href="cart.html">View Cart</a>
+                <a href="delivered.html">Track My Order</a>
+                <a href="contact.html">Help</a>
+            </div>
+
+            
+
+            <div class="copyright">
+                <p>©2025- HTML CSS Ecommerce Template</p>
+            </div>
+        </footer>
+
+
+
+
+
+
+
+        <script src="script.js"></script>
+    </body>
+</html>

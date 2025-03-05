@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Threads&Trends</title>
+        <link rel="icon" type="image/x-icon" href="./img/icon1.png">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+        <link rel="stylesheet" href="style.css">
+        <style>
+/* Contact Form Styles */
+#contactForm {
+    align-items: center;
+    max-width: 500px;
+    margin: 20px 0;  /* Aligns to the left */
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+#contactForm h2 {
+    text-align: left;  /* Aligns heading to the left */
+    color: #000000;
+    margin-bottom: 10px;
+}
+
+#contactForm input,
+#contactForm textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: border 0.3s ease-in-out;
+}
+
+#contactForm input:focus,
+#contactForm textarea:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+#contactForm textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+#contactForm button {
+    background: #128ead;
+    color: #fff;
+    padding: 12px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+    width: fit-content;  /* Button size adapts to text */
+}
+#contactForm button:hover {
+    background-color: purple;
+    background: #9b0cbf; /* Slightly darker shade */
+    transform: translateY(-2px); /* Creates a subtle lift effect */
+    box-shadow: 0 4px 10px rgba(52, 61, 153, 0.3); /* Soft glow effect */
+}
+/* Align container to the left */
+.container {
+    display: flex;
+    justify-content: flex-start;
+    padding-left: 20px;
+}
+
+</style>
+    </head>
+
+    <body>
+        <section id="header">
+            <a href="hello.html">
+                <img src="https://github.com/srujal4518/website/blob/main/images/LOGO.png?raw=true" class="logo" alt="">
+            </a>
+            <ul id="navbar">
+                <li id="lg-search">
+                    <form id="searchForm" action="search.html" method="GET">
+                        <input type="text" id="searchInput" name="q" placeholder="Search products..." required onkeyup="searchProducts(event)">
+                        <button type="submit"><i class="bx bx-search"></i></button>
+                    </form>
+                    <ul id="searchResults"></ul> <!-- Dropdown for live results -->
+                </li>
+                <li><a  href="hello.html">Home</a></li>
+                <li><a href="shop.html">Shop</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a class="active" href="contact.html">Contact</a></li>
+                
+                <li id="lg-bag"><a href="cart.html"><i class='bx bx-shopping-bag'></i></a></li>
+                <a href="#" id="close"><i class='bx bx-x'></i></a>
+            </ul>
+            <div id="mobile">
+                <a href="cart.html"><i class='bx bx-shopping-bag'></i></a>
+                
+                <i id="bar" class='bx bx-menu'></i>
+            </div>
+        </section>
+
+        <section id="page-header" class="about-header">
+            <h2>#Lets Talk</h2>
+            <p>Leave a Message.we would love to hear from you!</p>
+        </section> 
+
+        <section id="contact-details" class="section-p1">
+            <div class="details">
+                <span>GET IN TOUCH</span>
+                <h2>Visit one of our agency locations or contact us today</h2>
+                <h3>Head Office</h3>
+                <div>
+                    <li>
+                        <i class='bx bx-map-alt'></i>
+                        <p>GANDHINAGAR</p>
+                    </li>
+                    <li>
+                        <i class='bx bx-envelope' ></i>
+                        <p>Threads@gmail.com</p>
+                    </li>
+                    <li>
+                        <i class='bx bxs-phone' ></i>
+                        <p>9016000361</p>
+                    </li>
+                    <li>
+                        <i class='bx bx-time-five' ></i>
+                        <p>Monday to Saturday: 9.00am to 5.00pm</p>
+                    </li>
+                </div>
+            </div>
+
+            <div class="map">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3672.1283116631794!2d72.68377987454165!3d23.164423212062843!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395c2b9b9f5e43e1%3A0x4c3c9b9f5bcb4e47!2sGIFT%20City%2C%20Gujarat!5e0!3m2!1sen!2sin!4v1706172838955!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+            </div>
+        </section>
+
+        
+
+    <form id="contactForm">
+        
+    <h2>Lets talk!</h2>
+        <input type="text" id="name" name="name" placeholder="Your Name" required>
+        <input type="email" id="email" name="email" placeholder="Your Email" required>
+        <input type="text" id="subject" name="subject" placeholder="Subject" required>
+        <textarea id="message" name="message" placeholder="Your Message" required></textarea>
+        <button type="submit">Send</button>
+    </form>
+    
+    <section class="contact-section">
+        <h2>Helpline & Support</h2>
+        <p><strong>Helpline Number:</strong> +91 9016000361</p>
+        <p><strong>Email:</strong> <a href="mailto:support@example.com">threads&trends@gmail.com</a></p>
+    </section>
+    
+    <style>
+        .contact-section {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: left;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            font-family: Arial, sans-serif;
+        }
+        .contact-section h2 {
+            font-size: 25px;
+            color: #000000;
+            margin-bottom: 10px;
+        }
+        .contact-section p {
+            color: black;
+            font-size: 18px;
+            margin: 5px 0;
+        }
+        .contact-section a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        .contact-section a:hover {
+            text-decoration: underline;
+        }
+    </style>
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value;
+
+            try {
+                const response = await fetch('/api/messages', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, email, subject, message })
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    alert("Message sent successfully!");
+                    document.getElementById('contactForm').reset();
+                } else {
+                    alert("Failed to send message: " + result.error);
+                }
+            } catch (error) {
+                alert("An error occurred. Please try again later.");
+                console.error("Error:", error);
+            }
+        });
+        
+</script>
+<footer class="section-p1">
+    <div class="col">
+        <img class="logo" src="" alt="">
+        <h4>Contact</h4>
+        <p><strong>Address:</strong> GANDHINAGAR</p>
+        <p><strong>Phone:</strong>9016000361</p>
+        <p><strong>Hours:</strong> 10:00 - 18:00, Mon - Sat</p>
+        <div class="follow">
+            <h4>Follow us</h4>
+            <div class="icon">
+                <a href="https://www.instagram.com/thethreadsntrends?igsh=MWFzbmUwd2ZraXUyYw==">
+                <i class='bx bxl-instagram' ></i>
+            </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col">
+        <h4>About</h4>
+        <a href="about.html">About us</a>
+        <a href="#">Devlivery Information</a>
+        
+        <a href="contact.html">Contact Us</a>
+    </div>
+
+    <div class="col">
+        <h4>My Account</h4>
+        <a href="index.html">Sign In</a>
+        <a href="cart.html">View Cart</a>
+        <a href="delivered.html">Track My Order</a>
+        <a href="contact.html">Help</a>
+    </div>
+
+    
+
+    <div class="copyright">
+        <p>©2025- HTML CSS Ecommerce Template</p>
+    </div>
+</footer>
+
+
+
+
+
+</body>
+</html>
