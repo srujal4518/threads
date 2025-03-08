@@ -4,7 +4,7 @@ const path = require("path");
 const cors = require("cors");
 const session = require("express-session");
 const bcrypt = require("bcrypt");
-require("dotenv").config();  // To load environment variables from .env
+require("dotenv").config(); // Load environment variables
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -21,10 +21,10 @@ app.use(session({
     cookie: { secure: false }
 }));
 
-// ✅ Serve Static Files (current directory, not public folder)
-app.use(express.static(__dirname));  // Serve static files from the root directory
+// ✅ Serve Static Files (current directory, no public folder)
+app.use(express.static(__dirname));
 
-// ✅ Connect to MongoDB Atlas Database using the MONGO_URI from .env
+// ✅ Connect to MongoDB Atlas
 mongoose.connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true
@@ -124,6 +124,35 @@ app.post("/login", async (req, res) => {
         res.status(500).json({ message: "Error logging in." });
     }
 });
+
+// ✅ Handle Profile Data Fetching
+app.get("/profile", async (req, res) => {
+    if (!req.session || !req.session.user) {
+        return res.status(401).json({ message: "Please log in first!" });
+    }
+
+    try {
+        const user = await User.findOne({ email: req.session.user.email }).select("-password"); // Exclude password
+        if (!user) {
+            return res.status(404).json({ message: "User not found" });
+        }
+        res.json(user);
+    } catch (error) {
+        res.status(500).json({ message: "Error fetching user data" });
+    }
+});
+
+// ✅ Handle Logout
+// ✅ Handle Logout
+app.post("/logout", (req, res) => {
+    req.session.destroy((err) => {
+        if (err) {
+            return res.status(500).json({ message: "Error logging out" });
+        }
+        res.sendFile(path.join(__dirname, "index.html"));
+    });
+});
+
 
 // ✅ Handle Contact Form Submission
 app.post("/api/messages", async (req, res) => {

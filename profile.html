@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Threads&Trends</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .profile-container {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            width: 450px;
+            text-align: center;
+            animation: popIn 0.6s ease-out;
+        }
+
+        @keyframes popIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .profile-icon {
+            font-size: 70px;
+            margin-bottom: 10px;
+            display: inline-block;
+            animation: bounce 1.5s infinite alternate;
+        }
+
+        @keyframes bounce {
+            from { transform: translateY(0); }
+            to { transform: translateY(-5px); }
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            color: #333;
+            font-size: 26px;
+        }
+
+        p {
+            font-size: 18px;
+            margin: 12px 0;
+            color: #555;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        strong {
+            color: #222;
+            margin-right: 8px;
+        }
+
+        button {
+            margin-top: 25px;
+            padding: 12px 18px;
+            width: 100%;
+            border: none;
+            border-radius: 10px;
+            background: linear-gradient(90deg, #ff5f6d, #ffc371);
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+            transition: 0.3s;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background: linear-gradient(90deg, #ff2a45, #ffaf60);
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <div class="profile-container">
+        <div class="profile-icon">👤</div>
+        <h2>User Profile</h2>
+        <p><strong>👤 Name:</strong> <span id="name"></span></p>
+        <p><strong>📧 Email:</strong> <span id="email"></span></p>
+        <p><strong>📞 Phone:</strong> <span id="phone"></span></p>
+        <p><strong>🏠 Address:</strong> <span id="address"></span></p>
+        <p><strong>⭐ User Type:</strong> <span id="user_type"></span></p>
+        <button onclick="logout()">🚪 Logout</button>
+    </div>
+
+    <script>
+        async function fetchProfile() {
+            try {
+                const response = await fetch("/profile");
+                if (!response.ok) {
+                    throw new Error("Not logged in");
+                }
+                const user = await response.json();
+                document.getElementById("name").textContent = user.name;
+                document.getElementById("email").textContent = user.email;
+                document.getElementById("phone").textContent = user.phone;
+                document.getElementById("address").textContent = user.address;
+                document.getElementById("user_type").textContent = user.user_type;
+            } catch (error) {
+                alert("Please log in first!");
+                window.location.href = "/index.html"; // Redirect to login page
+            }
+        }
+
+        function logout() {
+            fetch("/logout", { method: "POST" }).then(() => {
+                window.location.href = "/index.html";
+            });
+        }
+
+        fetchProfile();
+    </script>
+</body>
+</html>
