@@ -1,10 +1,12 @@
+// ✅ Import Required Modules
 const express = require("express");
 const mongoose = require("mongoose");
 const path = require("path");
 const cors = require("cors");
 const session = require("express-session");
 const bcrypt = require("bcrypt");
-require("dotenv").config(); // Load environment variables
+const MongoStore = require("connect-mongo");
+require("dotenv").config(); // ✅ Load environment variables
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -14,28 +16,33 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use(session({
-    secret: process.env.SESSION_SECRET || 'your_secret_key',
-    resave: false,
-    saveUninitialized: true,
-    cookie: { secure: false }
-}));
+// ✅ Construct MongoDB Connection URI Dynamically
+const MONGO_URI = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASS}@${process.env.MONGO_CLUSTER}/${process.env.MONGO_DB}?retryWrites=true&w=majority`;
 
-// ✅ Serve Static Files (current directory, no public folder)
-app.use(express.static(__dirname));
-
-// ✅ Connect to MongoDB Atlas
-mongoose.connect(process.env.MONGO_URI, {
+// ✅ MongoDB Connection
+mongoose.connect(MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 })
-.then(() => console.log("MongoDB Atlas Connected"))
-.catch(err => console.log("Error: " + err));
+.then(() => console.log("✅ MongoDB Atlas Connected"))
+.catch(err => console.error("❌ MongoDB Connection Error:", err));
+
+// ✅ Session Configuration (Stored in MongoDB)
+app.use(session({
+    secret: process.env.SESSION_SECRET || 'your_secret_key',
+    resave: false,
+    saveUninitialized: false,
+    store: MongoStore.create({ mongoUrl: MONGO_URI }), // Persistent session store
+    cookie: { secure: false, httpOnly: true } // Improve security
+}));
+
+// ✅ Serve Static Files Correctly
+app.use(express.static(__dirname));
 
 // ✅ Define Schemas & Models
 const userSchema = new mongoose.Schema({
     name: String,
-    email: String,
+    email: { type: String, unique: true },
     password: String,
     phone: String,
     address: String,
@@ -64,8 +71,8 @@ const checkoutSchema = new mongoose.Schema({
 const Checkout = mongoose.model("Checkout", checkoutSchema);
 
 const reviewSchema = new mongoose.Schema({
-    rating: Number,
-    review: String
+    rating: { type: Number, required: true },
+    review: { type: String, required: true }
 });
 const Review = mongoose.model("Review", reviewSchema);
 
@@ -73,7 +80,7 @@ const Review = mongoose.model("Review", reviewSchema);
 app.get("/", (req, res) => res.sendFile(path.join(__dirname, "final.html")));
 app.get("/register", (req, res) => res.sendFile(path.join(__dirname, "form.html")));
 app.get("/hello", (req, res) => {
-    if (!req.session || !req.session.user) {
+    if (!req.session.user) {
         return res.status(401).json({ message: "Please login first!" });
     }
     res.sendFile(path.join(__dirname, "hello.html"));
@@ -100,7 +107,7 @@ app.post("/register", async (req, res) => {
         await newUser.save();
         res.status(201).json({ message: "Registration successful!", redirectUrl: "/index.html" });
     } catch (err) {
-        res.status(500).json({ message: "Error registering user." });
+        res.status(500).json({ message: "Error registering user.", error: err.message });
     }
 });
 
@@ -121,13 +128,13 @@ app.post("/login", async (req, res) => {
         req.session.user = { name: user.name, email: user.email, user_type: user.user_type };
         res.status(200).json({ message: "Login successful!", redirectUrl: "/index.html" });
     } catch (err) {
-        res.status(500).json({ message: "Error logging in." });
+        res.status(500).json({ message: "Error logging in.", error: err.message });
     }
 });
 
 // ✅ Handle Profile Data Fetching
 app.get("/profile", async (req, res) => {
-    if (!req.session || !req.session.user) {
+    if (!req.session.user) {
         return res.status(401).json({ message: "Please log in first!" });
     }
 
@@ -138,21 +145,19 @@ app.get("/profile", async (req, res) => {
         }
         res.json(user);
     } catch (error) {
-        res.status(500).json({ message: "Error fetching user data" });
+        res.status(500).json({ message: "Error fetching user data", error: error.message });
     }
 });
 
-// ✅ Handle Logout
 // ✅ Handle Logout
 app.post("/logout", (req, res) => {
     req.session.destroy((err) => {
         if (err) {
             return res.status(500).json({ message: "Error logging out" });
         }
-        res.sendFile(path.join(__dirname, "index.html"));
+        res.json({ message: "Logged out successfully!", redirectUrl: "/" });
     });
 });
-
 
 // ✅ Handle Contact Form Submission
 app.post("/api/messages", async (req, res) => {
@@ -162,13 +167,12 @@ app.post("/api/messages", async (req, res) => {
         await newMessage.save();
         res.json({ message: "Message sent successfully!" });
     } catch (error) {
-        res.status(500).json({ error: "Error sending message" });
+        res.status(500).json({ message: "Error sending message", error: error.message });
     }
 });
 
 // ✅ Handle Checkout Form Submission
 app.post("/submit-checkout", async (req, res) => {
-    console.log("Received Data:", req.body);
     try {
         if (!req.body || Object.keys(req.body).length === 0) {
             return res.status(400).json({ message: "No data received" });
@@ -178,8 +182,7 @@ app.post("/submit-checkout", async (req, res) => {
         await newOrder.save();
         res.redirect("/success.html");
     } catch (error) {
-        console.error("Error saving data:", error);
-        res.status(500).redirect("/error.html");
+        res.status(500).json({ message: "Error processing checkout", error: error.message });
     }
 });
 
@@ -191,7 +194,7 @@ app.post("/reviews", async (req, res) => {
         await newReview.save();
         res.status(201).json({ message: "Review saved successfully" });
     } catch (error) {
-        res.status(500).json({ message: "Error saving review", error });
+        res.status(500).json({ message: "Error saving review", error: error.message });
     }
 });
 
@@ -201,11 +204,11 @@ app.get("/reviews", async (req, res) => {
         const reviews = await Review.find();
         res.status(200).json(reviews);
     } catch (error) {
-        res.status(500).json({ message: "Error fetching reviews", error });
+        res.status(500).json({ message: "Error fetching reviews", error: error.message });
     }
 });
 
 // ✅ Start Server
 app.listen(PORT, () => {
-    console.log(`Server running on http://localhost:${PORT}`);
+    console.log(`✅ Server running on http://localhost:${PORT}`);
 });
